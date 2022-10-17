@@ -11,7 +11,7 @@ Instale as dependências: pip install -r requirements.txt
 
 Inicie o container do banco de dados: docker-compose up -d
 
-*No minha maquina tenho que dar um tempo entre os dois comandos*</br>
+*Na minha maquina tenho que dar um tempo entre os dois comandos*</br>
 Inicie o banco de dados: python3 initialize.py
 
 Inicie o app e use as rotas: python3 layers/server.py
