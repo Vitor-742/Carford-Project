@@ -1,7 +1,10 @@
 from services import connection
 
+
 def create_car_service(body):
-    connection.mycursor.execute(f"SELECT * FROM owners WHERE name = '{body['owner_name']}'")
+    connection.mycursor.execute(
+        f"SELECT * FROM owners WHERE name = '{body['owner_name']}'"
+    )
     myresult = connection.mycursor.fetchone()
     if not myresult:
         return {
@@ -13,26 +16,21 @@ def create_car_service(body):
             'status': 400,
             'mensagem': 'somente 3 carros são válidos por pessoa'
         }
-    try:
-        connection.mycursor.execute(
-            f"""UPDATE owners SET qtycars = '{myresult[2]+1}'
-            WHERE id = '{myresult[0]}'"""
-        )
-        connection.mydb.commit()
-        connection.mycursor.execute(
-            f"""INSERT INTO cars (owner, color, type)
-            VALUES (%s, %s, %s)""",
-            [myresult[0], body['color'], body['type']]
-        )
-        connection.mydb.commit()
-        return {
-            'status': 201,
-            'mensagem': 'criado'
-        }
-    except:
-        return {
-            'status': 500
-        }
+    connection.mycursor.execute(
+        f"""UPDATE owners SET qtycars = '{myresult[2]+1}'
+        WHERE id = '{myresult[0]}'"""
+    )
+    connection.mydb.commit()
+    connection.mycursor.execute(
+        """INSERT INTO cars (owner, color, type)
+        VALUES (%s, %s, %s)""",
+        [myresult[0], body['color'], body['type']]
+    )
+    connection.mydb.commit()
+    return {
+        'status': 201,
+        'mensagem': 'criado'
+    }
 
 def get_all_cars_service():
     try:

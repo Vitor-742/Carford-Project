@@ -8,8 +8,6 @@ mydb = mysql.connector.connect(
 
 mycursor = mydb.cursor()
 
-mycursor.execute("DROP DATABASE carford")
-
 mycursor.execute("CREATE DATABASE carford")
 
 mydb = mysql.connector.connect(

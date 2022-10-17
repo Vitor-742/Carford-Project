@@ -9,7 +9,9 @@ Crie um ambiente virtual: source carford_venv/bin/activate
 
 Instale as dependências: pip install -r requirements.txt
 
-Inicie o banco de dados com docker-compose: docker-compose up -d
+Inicie o container do banco de dados: docker-compose up -d
+
+Inicie o banco de dados: python3 initialize.py
 
 Inicie o app e use as rotas: python3 layers/server.py
 
